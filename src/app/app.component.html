@@ -1,29 +1,49 @@
-<div class="background-black">
-  <div class="container">
-    <div class="container-main">
-      <h1 class="container-main_center">Password Generator</h1>
-      <div class="container-main_length">
-        <label>Enter Length</label>
-        <input />
+<div class="container">
+  <div class="columns is-centered">
+    <div class="box column is-one-third">
+      <h1 class="title has-text-centered">Password Generator</h1>
+
+      <div class="field">
+        <label>Length</label>
+        <input class="input" (input)="onChangeLength($event.target.value)" />
       </div>
-      <div class="container-main_checkbox">
-        <label>Use Letter</label>
-        <input type="checkbox" />
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseLetters()" type="checkbox" />
+            Use Letters
+          </label>
+        </div>
       </div>
-      <div class="container-main_checkbox">
-        <label>Use Numbers</label>
-        <input type="checkbox" />
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseNumbers()" type="checkbox" />
+            Use Numbers
+          </label>
+        </div>
       </div>
-      <div class="container-main_checkbox">
-        <label>Use Symbole</label>
-        <input type="checkbox" />
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseSymbols()" type="checkbox" />
+            Use Symbols
+          </label>
+        </div>
       </div>
-      <div class="container-main-button">
-        <button class="btn-primary" (click)="onButtonClick()">Generate</button>
-      </div>
-      <div class="container-main-yourpassword">
+
+      <button [disabled]="
+          !(length && (includeLetters || includeSymbols || includeNumbers))
+        " (click)="onButtonClick()" class="button is-link is-fullwidth">
+        Generate!
+      </button>
+
+      <div class="box" *ngIf="password">
         <label>Your Password</label>
-        <input [value]="password" />
+        <input class="input" [value]="password" />
       </div>
     </div>
   </div>
